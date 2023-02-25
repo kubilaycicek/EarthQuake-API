@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "d2eafc0b-993a-45ab-b6e1-f7e873a24802",
+		"name": "AFAD-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/earthquake/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"earthquake",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
