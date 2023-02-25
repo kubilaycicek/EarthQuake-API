@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class EarthQuakeServiceImpl implements EarthQuakeService {
-    final String AFAD_WEB_URL = "https://deprem.afad.gov.tr/last-earthquakes.html";
+    final static String AFAD_WEB_URL = "https://deprem.afad.gov.tr/last-earthquakes.html";
 
     @Override
     public List<EarthQuakeDto> getEarthQuakeList() {
@@ -23,15 +23,12 @@ public class EarthQuakeServiceImpl implements EarthQuakeService {
         try {
 
             Document doc = Jsoup.connect(AFAD_WEB_URL).get();
-            Elements tableRows = doc.select("tr");
+            Elements tableRows = doc.select("tbody > tr");
 
             List<EarthQuakeDto> quakeDtoList = new ArrayList<>();
 
-            if (tableRows.size() != 0) {
-                tableRows.remove(0);
-            }
-
             tableRows.stream().forEach(item -> {
+
                 EarthQuakeDto quakeDto = new EarthQuakeDto();
                 quakeDto.setDate(item.select("td").get(0).text());
                 quakeDto.setLatitude(item.select("td").get(1).text());
