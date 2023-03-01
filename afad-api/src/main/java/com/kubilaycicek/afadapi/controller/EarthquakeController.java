@@ -1,6 +1,7 @@
 package com.kubilaycicek.afadapi.controller;
 
 import com.kubilaycicek.afadapi.payload.dto.EarthQuakeDto;
+import com.kubilaycicek.afadapi.payload.response.GetEarthQuakeListResponse;
 import com.kubilaycicek.afadapi.service.EarthQuakeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,13 +23,13 @@ public class EarthquakeController {
     private final EarthQuakeService earthQuakeService;
 
     @GetMapping("list")
-    public ResponseEntity<List<EarthQuakeDto>> getEarthQuakeList() {
-        return ResponseEntity.status(HttpStatus.OK).body(earthQuakeService.getEarthQuakeList());
+    public ResponseEntity<GetEarthQuakeListResponse> getEarthQuakeList() {
+        return ResponseEntity.status(HttpStatus.OK).body(new GetEarthQuakeListResponse(earthQuakeService.getEarthQuakeList()));
     }
 
     @GetMapping("list/search/city/name/{name}")
-    public ResponseEntity<List<EarthQuakeDto>> getEarthQuakeByCityName(@PathVariable String name) {
-        return ResponseEntity.status(HttpStatus.OK).body(earthQuakeService.getEarthQuakeByCityName(name));
+    public ResponseEntity<GetEarthQuakeListResponse> getEarthQuakeByCityName(@PathVariable String name) {
+        return ResponseEntity.status(HttpStatus.OK).body(new GetEarthQuakeListResponse(earthQuakeService.getEarthQuakeByCityName(name)));
     }
 
     @Scheduled(fixedRateString = "${cache.list.earthQuakeListTTL}")
