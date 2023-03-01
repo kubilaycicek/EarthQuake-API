@@ -25,6 +25,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GetByCityName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/earthquake/list/search/city/name/kahramanmaraş",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"earthquake",
+						"list",
+						"search",
+						"city",
+						"name",
+						"kahramanmaraş"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear Cache Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/earthquake/clear-memory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"earthquake",
+						"clear-memory"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
