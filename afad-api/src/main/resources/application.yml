@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: EarthQuakeAPI
+
+cache:
+  list:
+    earthQuakeListTTL: 43200000

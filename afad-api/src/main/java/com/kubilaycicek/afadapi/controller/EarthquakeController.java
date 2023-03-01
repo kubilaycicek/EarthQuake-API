@@ -3,17 +3,19 @@ package com.kubilaycicek.afadapi.controller;
 import com.kubilaycicek.afadapi.payload.dto.EarthQuakeDto;
 import com.kubilaycicek.afadapi.service.EarthQuakeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/earthquake/")
 public class EarthquakeController {
 
@@ -21,12 +23,20 @@ public class EarthquakeController {
 
     @GetMapping("list")
     public ResponseEntity<List<EarthQuakeDto>> getEarthQuakeList() {
-
         return ResponseEntity.status(HttpStatus.OK).body(earthQuakeService.getEarthQuakeList());
     }
+
     @GetMapping("list/search/city/name/{name}")
-    public ResponseEntity<List<EarthQuakeDto>> getEarthQuakeByCityName(@PathVariable String name){
+    public ResponseEntity<List<EarthQuakeDto>> getEarthQuakeByCityName(@PathVariable String name) {
         return ResponseEntity.status(HttpStatus.OK).body(earthQuakeService.getEarthQuakeByCityName(name));
+    }
+
+    @Scheduled(fixedRateString = "${cache.list.earthQuakeListTTL}")
+    @CacheEvict("lastOfThe100EarthQuakeList")
+    @PostMapping("clear-memory")
+    public ResponseEntity<String> clearAllCacheRecords() {
+        log.info("Cleared all cache data");
+        return ResponseEntity.status(HttpStatus.OK).body("Cache cleared :)");
     }
 
 }

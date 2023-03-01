@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,11 +17,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class EarthQuakeServiceImpl implements EarthQuakeService {
-    final static String AFAD_WEB_URL = "https://deprem.afad.gov.tr/last-earthquakes.html";
+    static final String AFAD_WEB_URL = "https://deprem.afad.gov.tr/last-earthquakes.html";
 
+    @Cacheable("lastOfThe100EarthQuakeList")
     @Override
     public List<EarthQuakeDto> getEarthQuakeList() {
-
         try {
 
             Document doc = Jsoup.connect(AFAD_WEB_URL).get();
