@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Service
 @Slf4j
+@Service
 public class EarthQuakeServiceImpl implements EarthQuakeService {
     final static String AFAD_WEB_URL = "https://deprem.afad.gov.tr/last-earthquakes.html";
 
@@ -46,6 +47,13 @@ public class EarthQuakeServiceImpl implements EarthQuakeService {
         } catch (Exception exception) {
             log.error("EarthQuake Service : " + exception.getMessage());
         }
+
         return new ArrayList<>();
     }
+
+    @Override
+    public List<EarthQuakeDto> getEarthQuakeByCityName(String name) {
+        return this.getEarthQuakeList().stream().filter(x -> x.getLocation().toLowerCase().contains(name)).collect(Collectors.toList());
+    }
+
 }

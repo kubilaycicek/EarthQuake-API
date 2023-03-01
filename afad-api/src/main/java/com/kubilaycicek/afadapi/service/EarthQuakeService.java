@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface EarthQuakeService {
     List<EarthQuakeDto> getEarthQuakeList();
+    List<EarthQuakeDto> getEarthQuakeByCityName(String name);
 }
