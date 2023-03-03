@@ -33,7 +33,7 @@ public class EarthquakeController {
     }
 
     @Scheduled(fixedRateString = "${cache.list.earthQuakeListTTL}")
-    @CacheEvict("lastOfThe100EarthQuakeList")
+    @CacheEvict("earthQuakeList")
     @PostMapping("clear-memory")
     public ResponseEntity<String> clearAllCacheRecords() {
         log.info("Cleared all cache data");

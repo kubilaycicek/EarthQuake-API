@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class EarthQuakeServiceImpl implements EarthQuakeService {
     static final String AFAD_WEB_URL = "https://deprem.afad.gov.tr/last-earthquakes.html";
 
-    @Cacheable("lastOfThe100EarthQuakeList")
+    @Cacheable("earthQuakeList")
     @Override
     public List<EarthQuakeDto> getEarthQuakeList() {
         try {
