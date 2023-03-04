@@ -2,14 +2,13 @@ package com.kubilaycicek.afadapi.service;
 
 import com.kubilaycicek.afadapi.payload.dto.EarthQuakeDto;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,10 +21,11 @@ public class EarthQuakeServiceImpl implements EarthQuakeService {
     @Cacheable("earthQuakeList")
     @Override
     public List<EarthQuakeDto> getEarthQuakeList() {
-        try {
 
-            Document doc = Jsoup.connect(AFAD_WEB_URL).get();
-            Elements tableRows = doc.select("tbody > tr");
+        try {
+            Connection connection = Jsoup.connect(AFAD_WEB_URL);
+            Document document = connection.get();
+            Elements tableRows = document.select("tbody > tr");
 
             List<EarthQuakeDto> quakeDtoList = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class EarthQuakeServiceImpl implements EarthQuakeService {
 
             return quakeDtoList;
         } catch (Exception exception) {
-            log.error("EarthQuake Service : " + exception.getMessage());
+            log.error("Message : " + exception.getMessage());
         }
 
         return new ArrayList<>();
