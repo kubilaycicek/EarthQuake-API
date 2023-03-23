@@ -13,7 +13,7 @@ public class EarthQuakeDto {
     private String longtute;
     private String depth;
     private String type;
-    private String size;
+    private Double size;
     private String location;
     private String earthQuakeId;
 

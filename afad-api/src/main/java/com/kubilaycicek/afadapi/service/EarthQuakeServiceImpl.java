@@ -37,7 +37,7 @@ public class EarthQuakeServiceImpl implements EarthQuakeService {
                 quakeDto.setLongtute(item.select("td").get(2).text());
                 quakeDto.setDepth(item.select("td").get(3).text());
                 quakeDto.setType(item.select("td").get(4).text());
-                quakeDto.setSize(item.select("td").get(5).text());
+                quakeDto.setSize(Double.valueOf(item.select("td").get(5).text()));
                 quakeDto.setLocation(item.select("td").get(6).text());
                 quakeDto.setEarthQuakeId(item.select("td").get(7).text());
                 quakeDtoList.add(quakeDto);
@@ -53,8 +53,13 @@ public class EarthQuakeServiceImpl implements EarthQuakeService {
     }
 
     @Override
-    public List<EarthQuakeDto> getEarthQuakeByCityName(String name) {
+    public List<EarthQuakeDto> getListByCityName(String name) {
         return this.getEarthQuakeList().stream().filter(x -> x.getLocation().toLowerCase().contains(name)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EarthQuakeDto> getListBetweenMinSizeAndMaxSize(Double min, Double max) {
+        return this.getEarthQuakeList().stream().filter(x -> x.getSize() > min && x.getSize() < max).collect(Collectors.toList());
     }
 
 }

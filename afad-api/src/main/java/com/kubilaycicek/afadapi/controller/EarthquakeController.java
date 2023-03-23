@@ -1,6 +1,7 @@
 package com.kubilaycicek.afadapi.controller;
 
 import com.kubilaycicek.afadapi.payload.dto.EarthQuakeDto;
+import com.kubilaycicek.afadapi.payload.request.BetweenMinAndMaxSizeRequest;
 import com.kubilaycicek.afadapi.payload.response.GetEarthQuakeListResponse;
 import com.kubilaycicek.afadapi.service.EarthQuakeService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,12 @@ public class EarthquakeController {
 
     @GetMapping("list/search/city/name/{name}")
     public ResponseEntity<GetEarthQuakeListResponse> getEarthQuakeByCityName(@PathVariable String name) {
-        return ResponseEntity.status(HttpStatus.OK).body(new GetEarthQuakeListResponse(earthQuakeService.getEarthQuakeByCityName(name)));
+        return ResponseEntity.status(HttpStatus.OK).body(new GetEarthQuakeListResponse(earthQuakeService.getListByCityName(name)));
+    }
+
+    @GetMapping("list/between-min-and-max-size")
+    public ResponseEntity<GetEarthQuakeListResponse> getListFilterBetweenMinAndMaxSize(@RequestBody BetweenMinAndMaxSizeRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(new GetEarthQuakeListResponse(earthQuakeService.getListBetweenMinSizeAndMaxSize(request.getMin(), request.getMax())));
     }
 
     @Scheduled(fixedRateString = "${cache.list.earthQuakeListTTL}")

@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface EarthQuakeService {
     List<EarthQuakeDto> getEarthQuakeList();
-    List<EarthQuakeDto> getEarthQuakeByCityName(String name);
+    List<EarthQuakeDto> getListByCityName(String name);
+
+    List<EarthQuakeDto> getListBetweenMinSizeAndMaxSize(Double min,Double max);
 }
