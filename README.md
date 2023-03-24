@@ -15,7 +15,7 @@ You can use the API and get live earthquake's data in Turkey. The list get data 
 
 ### How to run ?
 ```console
-docker build -t afad-service .
+docker compose up -d
 
 ```
  
