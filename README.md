@@ -11,3 +11,7 @@ You can use the API and get live earthquake's data in Turkey. The list get data 
 * Java 11
 * Jsoup 1.15.4
 * Lombok
+* Docker
+
+### How to run ?
+ docker build -t afad-service .
