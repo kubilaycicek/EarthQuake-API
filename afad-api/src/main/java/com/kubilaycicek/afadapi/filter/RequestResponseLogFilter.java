@@ -1,4 +1,4 @@
-package com.kubilaycicek.afadapi.interceptor;
+package com.kubilaycicek.afadapi.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
