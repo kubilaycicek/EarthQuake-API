@@ -5,6 +5,3 @@ spring:
 cache:
   list:
     earthQuakeListTTL: 43200000
-
-server:
-  port: 9090
