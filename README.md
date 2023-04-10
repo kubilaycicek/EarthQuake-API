@@ -20,6 +20,6 @@ docker build -t afad-service .
 ```
 
 ```console
-docker run -d  -p 8080:8080 afad-service
+ docker run -it --rm -p 8080:8080 afad-service
 ```
  
